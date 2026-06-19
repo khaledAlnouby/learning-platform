@@ -1,0 +1,49 @@
+package com.example.userservice.controller;
+
+import com.example.userservice.model.Role;
+import com.example.userservice.model.User;
+import com.example.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/students")
+    public ResponseEntity<List<User>> getStudents() {
+        return ResponseEntity.ok(userService.getUsersByRole(Role.STUDENT));
+    }
+
+    @GetMapping("/instructors")
+    public ResponseEntity<List<User>> getInstructors() {
+        return ResponseEntity.ok(userService.getUsersByRole(Role.INSTRUCTOR));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+}
