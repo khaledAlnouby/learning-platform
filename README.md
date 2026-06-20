@@ -59,7 +59,7 @@ Manages course lifecycle and student reviews.
 ### Enrollment Service — Port 8083
 Handles student enrollment requests and instructor responses.
 
-- Statuses: `PENDING` → `ACCEPTED` / `REJECTED` / `CANCELLED`
+- Statuses: `PENDING` → `ACCEPTED` / `REJECTED` /`CANCELLED`
 - On accept: increments course enrolled counter via course-service
 - On every status change: sends notification via notification-service
 - Endpoints: `POST /api/enrollments`, `PATCH /api/enrollments/{id}/accept`, `PATCH /api/enrollments/{id}/reject`, `PATCH /api/enrollments/{id}/cancel`
@@ -147,7 +147,7 @@ Navigate to [http://localhost:5173](http://localhost:5173)
 
 ### 4. Create an Admin Account
 
-Register via the API (the UI registration form only supports Student and Instructor):
+Register via the API (the UI registration form only supports Student and Instructor ):
 
 ```bash
 curl -X POST http://localhost:8081/api/users/auth/register \
